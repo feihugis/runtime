@@ -35,5 +35,6 @@ OP_ATTR_TYPE(I32, int32_t)
 OP_ATTR_TYPE(I64, int64_t)
 OP_ATTR_TYPE(F32, float)
 OP_ATTR_TYPE(F64, double)
+OP_ATTR_TYPE(SSIZE_T, ssize_t)
 
 #undef OP_ATTR_TYPE

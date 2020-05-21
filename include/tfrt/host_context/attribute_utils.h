@@ -320,7 +320,7 @@ class DenseAttr : public internal::AttrHeaderBase<DenseAttr, BEFDenseAttr> {
     // designed to be target specific, we plan to use int32_t to store shape
     // dimensions in BEF for 32-bit architecture.
     return llvm::makeArrayRef(
-        reinterpret_cast<const int64_t*>(bytes + header.shape_offset),
+        reinterpret_cast<const ssize_t*>(bytes + header.shape_offset),
         header.rank);
   }
 

@@ -142,8 +142,7 @@ static Chain OpAttrsSetString(Argument<OpAttrs> attrs, StringAttribute key,
 
 static llvm::Expected<TensorHandle> ConstStringTensor(
     ArrayAttr shape, AggregateAttr value, const ExecutionContext &exec_ctx) {
-  TensorMetadata metadata(DType(DType::String), shape.GetValue<int64_t>());
-
+  TensorMetadata metadata(DType(DType::String), shape.GetValue<ssize_t>());
   auto tensor_ref =
       StringHostTensor::MakeConstructedAsyncValueRef(metadata, exec_ctx.host());
   if (!tensor_ref)

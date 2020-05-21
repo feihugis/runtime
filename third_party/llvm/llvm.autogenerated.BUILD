@@ -4824,6 +4824,7 @@ cc_library(
     ]),
     hdrs = glob([
         "include/llvm/Target/VE/*.h",
+        ":ve_asm_printer",
         "include/llvm/Target/VE/*.def",
         "include/llvm/Target/VE/*.inc",
         "lib/Target/VE/*.h",
@@ -4847,6 +4848,27 @@ cc_library(
 alias(
     name = "ve_code_gen",
     actual = ":VECodeGen",
+)
+
+cc_library(
+    name = "ve_asm_printer",
+    srcs = glob([
+        "lib/Target/VE/InstPrinter/*.c",
+        "lib/Target/VE/InstPrinter/*.cpp",
+        "lib/Target/VE/InstPrinter/*.inc",
+    ]),
+    hdrs = glob([
+        "include/llvm/Target/VE/InstPrinter/*.h",
+        "include/llvm/Target/VE/InstPrinter/*.def",
+        "include/llvm/Target/VE/InstPrinter/*.inc",
+        "lib/Target/VE/InstPrinter/*.h",
+    ]),
+    copts = llvm_copts + ["-Iexternal/llvm-project/llvm/lib/Target/VE"],
+    deps = [
+        ":config",
+        ":mc",
+        ":support",
+    ],
 )
 
 cc_library(
@@ -5189,6 +5211,9 @@ cc_library(
         ":X86Info",
         ":config",
         ":x86_defs",
+        ":x86_desc",
+        ":x86_info",
+        ":x86_utils",
     ],
 )
 
@@ -5314,6 +5339,27 @@ cc_library(
 alias(
     name = "x_core_code_gen",
     actual = ":XCoreCodeGen",
+)
+
+cc_library(
+    name = "x86_utils",
+    srcs = glob([
+        "lib/Target/X86/Utils/*.c",
+        "lib/Target/X86/Utils/*.cpp",
+        "lib/Target/X86/Utils/*.inc",
+    ]),
+    hdrs = glob([
+        "include/llvm/Target/X86/Utils/*.h",
+        "include/llvm/Target/X86/Utils/*.def",
+        "include/llvm/Target/X86/Utils/*.inc",
+        "lib/Target/X86/Utils/*.h",
+    ]),
+    copts = llvm_copts + ["-Iexternal/llvm-project/llvm/lib/Target/X86"],
+    deps = [
+        ":code_gen",
+        ":config",
+        ":support",
+    ],
 )
 
 cc_library(
